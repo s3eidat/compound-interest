@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Compound Interest — Free Savings Growth Calculator | S3eidat Tools</title>
+<meta name="description" content="See your savings grow: initial deposit, monthly contributions, any compounding frequency, inflation-adjusted value, yearly table and growth chart. Free and private.">
+<meta property="og:title" content="Compound Interest — free, private savings calculator">
+<meta property="og:description" content="See your savings grow over time. Runs 100% in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="compound-interest">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Compound Interest</h1>
+    <p>See how a starting amount and regular monthly saving grow over the years, how much is your money and how much is interest, and what it is worth in today's money.</p>
+  </section>
+
+  <div class="ci-grid">
+    <section class="card stack">
+      <h2>Your savings</h2>
+      <label class="field">Initial deposit
+        <input class="input" id="initial" inputmode="decimal" autocomplete="off" placeholder="10,000">
+      </label>
+      <label class="field">Monthly contribution
+        <input class="input" id="monthly" inputmode="decimal" autocomplete="off" placeholder="200">
+      </label>
+      <div class="grid-2 tight">
+        <label class="field">Annual rate
+          <span class="adorn"><input class="input" id="rate" inputmode="decimal" autocomplete="off" placeholder="7"><i>%</i></span>
+        </label>
+        <label class="field">Years
+          <input class="input" id="years" inputmode="numeric" autocomplete="off" placeholder="20">
+        </label>
+      </div>
+      <label class="field">Compounding
+        <select class="select" id="freq">
+          <option value="1">Yearly</option>
+          <option value="2">Half-yearly</option>
+          <option value="4">Quarterly</option>
+          <option value="12">Monthly</option>
+          <option value="365">Daily</option>
+          <option value="0">Continuously</option>
+        </select>
+      </label>
+      <div class="field">
+        <span>Contributions made at the</span>
+        <div class="seg" id="timing" role="group" aria-label="Contribution timing">
+          <button type="button" data-v="end" aria-pressed="true">End of month</button>
+          <button type="button" data-v="start" aria-pressed="false">Start of month</button>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="infl-on"> Adjust for inflation</label>
+      <label class="field" id="infl-wrap" hidden>Inflation per year
+        <span class="adorn"><input class="input" id="infl" inputmode="decimal" autocomplete="off" placeholder="3"><i>%</i></span>
+      </label>
+      <p class="faint" id="err" role="alert"></p>
+    </section>
+
+    <section class="card stack">
+      <div class="row between">
+        <h2>After <span id="yrs-lbl">20 years</span></h2>
+        <button class="btn small" id="copy"><svg class="i"><use href="#i-copy"/></svg>Copy summary</button>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="split" id="split" aria-hidden="true"><i class="k-c"></i><i class="k-g"></i></div>
+      <canvas class="chart" id="chart" role="img" aria-label="Balance per year split into deposits and interest"></canvas>
+      <div class="legend"><span><i class="k-c"></i>Your deposits</span><span><i class="k-g"></i>Interest earned</span><span id="leg-real" hidden><i class="k-r"></i>In today's money</span></div>
+    </section>
+  </div>
+
+  <section class="card mt">
+    <div class="row between">
+      <h2>Year by year</h2>
+      <button class="btn small" id="csv"><svg class="i"><use href="#i-download"/></svg>CSV</button>
+    </div>
+    <div class="tbl-wrap sched mt"><table class="tbl" id="table"></table></div>
+    <p class="faint mt">Projection only: real returns go up and down, and fees and taxes are not included. Not financial advice.</p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
